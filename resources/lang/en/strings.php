@@ -127,9 +127,11 @@ return [
 
         'male' => 'Male',
         'female' => 'Female',
+        'kids' => 'Kids',
 
         'subscriptions' => [
             'essentials' => 'Essentials Package',
+            'essentials-plus' => 'Essentials Plus Package',
             'trendy' => 'I\'m Trendy! Package',
             'promo' => 'Promotional Value Package',
             'wired' => 'Wired Attire Package'
