@@ -91,7 +91,7 @@
                 </div><!-- panel -->
             </div><!-- col-xs-4 -->
         </a>
-
+<!--
         <a href="{{ route('frontend.package.essentials-plus.kids') }}">
             <div class="col-xs-4">
                 <div class="panel panel-default">
@@ -106,9 +106,9 @@
                         <img src="<?php echo asset("storage/essentials-plus/icon-skirt.png")?>" />
                         <img src="<?php echo asset("storage/essentials-plus/icon-dress.png")?>" />
                     </div>
-                </div><!-- panel -->
-            </div><!-- col-xs-4 -->
-        </a>
+                </div>
+            </div>
+        </a>-->
         {{--        <div class="col-xs-12">
 
                     <div class="panel panel-default">
