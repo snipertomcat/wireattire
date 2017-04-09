@@ -26,19 +26,25 @@ class SubscriptionTypeTableSeeder extends Seeder
         $types = [
             [
                 'id'         => 1,
-                'name'       => 'User',
+                'name'       => 'Male',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
                 'id'         => 2,
-                'name'       => 'Role',
+                'name'       => 'Female',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'id'        => 3,
+                'name'      => 'Kids',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ];
 
-        DB::table('history_types')->insert($types);
+        DB::table('subscription_types')->insert($types);
 
         $this->enableForeignKeys();
     }
