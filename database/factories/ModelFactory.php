@@ -67,3 +67,9 @@ $factory->state(Role::class, 'admin', function () {
         'all' => 1,
     ];
 });
+
+$factory->define(App\Models\Subscription\Packages::class, function (Faker\Generator $faker) {
+    return [
+        'id' => 1,
+    ];
+});

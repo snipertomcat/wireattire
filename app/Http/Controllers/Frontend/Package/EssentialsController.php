@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Package;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AccountController.
@@ -14,7 +15,9 @@ class EssentialsController extends Controller
      */
     public function male()
     {
-        return view('frontend.package.essentials.male');
+        $products = DB::table('products_startup')->get();
+
+        return view('frontend.package.essentials.male', ['products' => $products]);
     }
 
     /**
