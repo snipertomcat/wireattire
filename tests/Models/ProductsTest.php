@@ -18,10 +18,10 @@ class ProductsTest extends TestCase
         $product->name = 'test';
         $product->description = 'description';
         $product->price = 17.99;
-        $product->package = new \App\Models\Subscription\Packages();
-        $product->category = new \App\Models\Products\ProductsCategory();
+        $product->package = \App\Models\Subscription\Packages::find(1);
+        $product->category = \App\Models\Products\ProductsCategory::find(1);
 
-        print_r($product);
+        print_r($product->morphTo('package'));
     }
 
     public function testSelectProducts()
