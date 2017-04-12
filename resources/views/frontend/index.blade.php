@@ -8,11 +8,11 @@
         </div>
 
         <a href="{{ route('frontend.package.essentials.male') }}">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-lg-4 col-m-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-2x fa-mars" aria-hidden="true" style="color:blue"></i>
-                        <button class="btn btn-default">{{ trans('strings.frontend.subscriptions.essentials') }} ({{trans('strings.frontend.male')}})</button>
+                        <div class="btn btn-default">{{ trans('strings.frontend.subscriptions.essentials') }} ({{trans('strings.frontend.male')}})</div>
                     </div>
 
                     <div class="panel-body">
@@ -21,33 +21,33 @@
                         <img src="<?php echo asset("storage/icon-tshirt.png")?>" />
                     </div>
                 </div><!-- panel -->
-            </div><!-- col-xs-4 -->
+            </div><!-- col-xs-12 -->
         </a>
 
         <a href="{{ route('frontend.package.essentials.female') }}">
-            <div class="col-xs-4">
-                    <div class="panel panel-default">
+            <div class="col-xs-12 col-lg-4 col-m-3">
+                    <div class="panel panel-default" style="padding-bottom: 25px;">
                         <div class="panel-heading">
                             <i class="fa fa-2x fa-venus" aria-hidden="true" style="color:deeppink"></i>
                             <button class="btn btn-default">{{ trans('strings.frontend.subscriptions.essentials') }} ({{trans('strings.frontend.female')}})</button>
                         </div>
-
                         <div class="panel-body">
                             <img src="<?php echo asset("storage/icon-socks-female.png")?>" />
-                            <img src="<?php echo asset("storage/icon-underwear-female.png")?>" />
+                            <img src="<?php echo asset("storage/icon-underwear-female.png")?>"  />
+                            <img src="<?php echo asset("storage/icon-bra.png")?>"  />
                             <img src="<?php echo asset("storage/icon-tshirt-female.png")?>" />
                         </div>
                     </div><!-- panel -->
-            </div><!-- col-xs-4 -->
+            </div><!-- col-xs-12 -->
         </a>
 
         <a href="{{ route('frontend.package.essentials.kids') }}">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-lg-4 col-m-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-2x fa-child" aria-hidden="true" style="color: #aa4a24"></i>
+                        <i class="fa fa-2x fa-venus" aria-hidden="true" style="color: deeppink"></i> <i class="fa fa-2x fa-mars" aria-hidden="true" style="color: blue"></i>
                         <button class="btn btn-default">{{ trans('strings.frontend.subscriptions.essentials') }} ({{trans('strings.frontend.kids')}})</button>
-                            <i class="fa fa-2x fa-venus" aria-hidden="true" style="color: deeppink"></i> <i class="fa fa-2x fa-mars" aria-hidden="true" style="color: blue"></i>
+                        <i class="fa fa-2x fa-child" aria-hidden="true" style="color: #aa4a24"></i>
                     </div>
                     <div class="panel-body">
                         <img src="<?php echo asset("storage/icon-clothes-kids-boys.png")?>" />
@@ -55,11 +55,11 @@
                         <img src="<?php echo asset("storage/icon-clothes-kids-girls.png")?>" />
                     </div>
                 </div><!-- panel -->
-            </div><!-- col-xs-4 -->
+            </div><!-- col-xs-12 -->
         </a>
 
         <a href="{{ route('frontend.package.essentials-plus.male') }}">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-lg-4 col-m-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-2x fa-mars" aria-hidden="true" style="color:blue"></i>
@@ -72,11 +72,11 @@
                         <img src="<?php echo asset("storage/essentials-plus/icon-shorts-male.png")?>" />
                     </div>
                 </div><!-- panel -->
-            </div><!-- col-xs-4 -->
+            </div><!-- col-xs-12 -->
         </a>
 
         <a href="{{ route('frontend.package.essentials-plus.female') }}">
-            <div class="col-xs-4">
+            <div class="col-xs-12 col-lg-4 col-m-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-2x fa-venus" aria-hidden="true" style="color:deeppink"></i>
@@ -89,11 +89,11 @@
                         <img src="<?php echo asset("storage/essentials-plus/icon-dress.png")?>" />
                     </div>
                 </div><!-- panel -->
-            </div><!-- col-xs-4 -->
+            </div><!-- col-xs-12 -->
         </a>
 <!--
         <a href="{{ route('frontend.package.essentials-plus.kids') }}">
-            <div class="col-xs-4">
+            <div class="col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <i class="fa fa-2x fa-child" aria-hidden="true" style="color: #aa4a24"></i>
