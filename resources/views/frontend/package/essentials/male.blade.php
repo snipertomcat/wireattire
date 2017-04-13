@@ -6,21 +6,27 @@
 
     <div class="row">
 
-        <div class="col-xs-12">
+            @component('frontend.includes.navbar')
+                @slot('progress_style')
+                    width: 30%
+                @endslot
+                @slot('step')
+                    2
+                @endslot
+                @slot('icon')
+                    <img src="<?php echo asset("storage/icon-underwear.png")?>" height="100px" width="100px" style="margin-left:5px;"/>
+                @endslot
+                @slot('package_name')
+                    Essentials - Men
+                @endslot
+            @endcomponent
 
-            <div class="alert alert-success" role="alert">
-                <strong>Please start by selecting some underwear</strong>
-            </div>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 10%; height: 20px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Your Progress</div>
-            </div>
-        </div>
+    </div>
 
-        <div class="col-xs-12">
-
-            @foreach ($products as $product)
+    <div class="row">
+        @foreach ($products as $product)
             <a href="">
-                <div class="col-xs-4">
+                <div class="col-xs-6 col-lg-3 col-md-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             {{ $product->name }}
@@ -33,8 +39,6 @@
                 </div><!-- col-xs-4 -->
             </a>
             @endforeach
-
-        </div><!-- col-md-12 -->
 
     </div><!-- row -->
 
