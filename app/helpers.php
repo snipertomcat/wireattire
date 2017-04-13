@@ -94,3 +94,19 @@ if (! function_exists('getRtlCss')) {
         return implode('/', $path).'/'.$filename.'.rtl.css';
     }
 }
+
+if (! function_exists('words')) {
+
+    function words($content, $words)
+    {
+        return \Illuminate\Support\Str::words($content, $words);
+    }
+}
+
+if (!function_exists('limitCharacters')) {
+
+    function limitCharacters($content, $characters)
+    {
+        return \Illuminate\Support\Str::limit($content, $characters);
+    }
+}
