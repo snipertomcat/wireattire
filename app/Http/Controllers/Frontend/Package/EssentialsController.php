@@ -15,9 +15,9 @@ class EssentialsController extends Controller
      */
     public function male()
     {
-        $products = DB::table('products_startup')->get();
+        $products = DB::table('products_startup')->where('category_id', '=', 1)->get();
 
-        return view('frontend.package.essentials.male', ['products' => $products]);
+        return view('frontend.package.essentials.male', ['products' => $products->toArray()]);
     }
 
     /**
