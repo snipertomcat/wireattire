@@ -19,62 +19,77 @@
                 @slot('package_name')
                     Essentials - Men
                 @endslot
+                @slot('category_id')
+                    {{ $category_id }}
+                @endslot
             @endcomponent
     </div>
-
-    @foreach(array_chunk($products, 3) as $threeProducts)
-        <div class="row">
-            @foreach($threeProducts as $product)
-                <a href="" data-toggle="modal" data-target=".product-focus-modal-{{ $product->sku }}">
-                    <div class="col-xs-3 col-lg-3 col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <span class="badge pull-right">${{ $product->price }}</span>
-                                {{ $product->name }}
-                            </div>
-                            <div class="panel-body">
-                                <img src="{{ asset('storage/products/'.$product->image1) }}" width="300px" height="300px"/>
-                            </div>
-                        </div><!-- panel -->
-                    </div><!-- col-xs-4 -->
-                </a>
-                <div class="modal fade product-focus-modal-{{ $product->sku }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <form name="product-select" class="pull-left">
-                                    <input type="hidden" name="sku" value="{{ $product->sku }}" />
-                                    <button class="btn btn-primary btn-lg">Select this item</button>
-                                    <span class="label label-default">${{ $product->price }}</span>
-                                </form>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-{{--                            <div class="row">
-                                <div class="col-sm-4 col-lg-2 col-sm-offset-8 col-lg-offset-1">
-
+    <div id="products-row-main" style="display: none">
+        @foreach(array_chunk($products, 3) as $threeProducts)
+            <div class="row">
+                @foreach($threeProducts as $product)
+                    <a href="" data-toggle="modal" data-target=".product-focus-modal-{{ $product->sku }}">
+                        <div class="col-xs-3 col-lg-3 col-md-3" id="product-panel-{{ $product->sku }}">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span class="badge pull-right">${{ $product->price }}</span>
+                                    {{ $product->name }}
                                 </div>
-                            </div>--}}
-                            <div class="row">
-                                <div class="col-sm-4 col-lg-10">
-                                    {{ $product->description }}
+                                <div class="panel-body">
+                                    <img src="{{ asset('storage/products/'.$product->image1) }}" width="300px" height="300px"/>
                                 </div>
-                                <div class="col-sm-6 col-lg-12">
+                            </div><!-- panel -->
+                        </div><!-- col-xs-4 -->
+                    </a>
+                    <div id="modal-{{ $product->sku }}" class="modal fade product-focus-modal-{{ $product->sku }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
                                     <div class="pull-left">
-                                        <img src="{{ asset('storage/products/' . $product->image1) }}" width="300px" height="300px" />
-                                        @if(isset($product->image2))
-                                            <img src="{{ asset('storage/products/' . $product->image2) }}" width="300px" height="300px" />
-                                        @endif
-                                        @if(isset($product->image3))
-                                            <img src="{{ asset('storage/products/' . $product->image3) }}" width="300px" height="300px" />
-                                        @endif
+                                        <button class="btn btn-primary btn-lg" onclick="setInput('sku', '<?php echo $product->sku ?>'); ">Select this item</button>
+                                        <span class="label label-default">${{ $product->price }}</span>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+    {{--                            <div class="row">
+                                    <div class="col-sm-4 col-lg-2 col-sm-offset-8 col-lg-offset-1">
+
+                                    </div>
+                                </div>--}}
+                                <div class="row">
+                                    <div class="col-sm-4 col-lg-10">
+                                        {{ $product->description }}
+                                    </div>
+                                    <div class="col-sm-6 col-lg-12">
+                                        <div class="pull-left">
+                                            <img src="{{ asset('storage/products/' . $product->image1) }}" width="300px" height="300px" />
+                                            @if(isset($product->image2))
+                                                <img src="{{ asset('storage/products/' . $product->image2) }}" width="300px" height="300px" />
+                                            @endif
+                                            @if(isset($product->image3))
+                                                <img src="{{ asset('storage/products/' . $product->image3) }}" width="300px" height="300px" />
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    @endforeach
-
+                @endforeach
+            </div>
+        @endforeach
+    </div>
 @endsection
+<script>
+    function setInput(name, value)
+    {
+        $('#input-'+name).val(value);
+        $('#modal-'+value).modal('hide');
+        //clear any prior selection backgrounds:
+        clearAllPanelBackgrounds();
+        //add background back to new selection:
+        $('#product-panel-'+value).addClass('uk-background-primary uk-light uk-padding uk-panel');
+        toggleNextButton('on');
+        return false;
+    }
+</script>
