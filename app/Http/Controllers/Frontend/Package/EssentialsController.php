@@ -17,7 +17,12 @@ class EssentialsController extends Controller
     {
         $products = DB::table('products_startup')->where('category_id', '=', 1)->get();
 
-        return view('frontend.package.essentials.male', ['products' => $products->toArray()]);
+        $data = [
+            'products' => $products->toArray(),
+            'category_id' => 1
+        ];
+
+        return view('frontend.package.essentials.male', $data);
     }
 
     /**
