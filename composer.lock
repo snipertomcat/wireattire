@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a2e108a7a3a73bc7b6a5c1745a358250",
+    "content-hash": "c6627cfc454f83e91d580effea022e73",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -1093,6 +1093,56 @@
             "time": "2017-01-26T19:27:05+00:00"
         },
         {
+            "name": "lavender/lavender",
+            "version": "v0.26.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/golavender/lavender.git",
+                "reference": "4dafdcb840194a7f7e1f3c611e87d68d586b64be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/golavender/lavender/zipball/4dafdcb840194a7f7e1f3c611e87d68d586b64be",
+                "reference": "4dafdcb840194a7f7e1f3c611e87d68d586b64be",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "": "src/Lavender"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thomas Woodward",
+                    "email": "tom@daftlabs.com",
+                    "homepage": "http://daftlabs.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "James Thompson",
+                    "email": "jt@daftlabs.com",
+                    "homepage": "http://daftlabs.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "jade-esque templates for PHP 5.3",
+            "homepage": "http://golavender.com",
+            "keywords": [
+                "HAML",
+                "jade",
+                "templating"
+            ],
+            "time": "2016-02-10T21:54:24+00:00"
+        },
+        {
             "name": "league/flysystem",
             "version": "1.0.35",
             "source": {
@@ -2147,6 +2197,56 @@
                 "xunit"
             ],
             "time": "2016-12-08T20:27:08+00:00"
+        },
+        {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
         },
         {
             "name": "psr/http-message",
@@ -4219,12 +4319,12 @@
             "version": "0.9.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "1e5e2ffdc4d71d7358ed58a6fdd30a4a0c506855"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/1e5e2ffdc4d71d7358ed58a6fdd30a4a0c506855",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/1e5e2ffdc4d71d7358ed58a6fdd30a4a0c506855",
                 "reference": "1e5e2ffdc4d71d7358ed58a6fdd30a4a0c506855",
                 "shasum": ""
             },
