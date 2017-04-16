@@ -6,7 +6,6 @@
         <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
             <div class="uk-card-badge uk-label">{{ $package_name }}</div>
             <h3 class="uk-card-title">Progress</h3>
-            <p>
             <div class="progress">
                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="{{ $progress_style }}">
                     Step {{ $step }}/5
@@ -21,8 +20,7 @@
                 <div class="pull-left">
                     Please select your {{ $icon }}
                 </div>
-                {{--<div uk-form-custom="target: > * > span:first" class="btn btn-lg">--}}
-                <form name="item-selection" id="item-selection">
+                <form name="item-selection" id="item-selection" method="post">
                     <select name="size" id="input-size" class="btn btn-primary pull-left" style="margin-top: 30px; margin-left: 30px;">
                         <option value="">Select Size</option>
                         <option value="SM">Small</option>
@@ -39,7 +37,6 @@
                 {{--</div>--}}
             </div>
         </div>
-        </p>
     </div>
 
 {{ $slot }}
