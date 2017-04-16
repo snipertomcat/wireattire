@@ -15,8 +15,22 @@ function toggleNextButton($state)
 
 function clearAllPanelBackgrounds()
 {
-    $('.col-xs-3.col-lg-3.col-md-3').removeClass('uk-background-primary uk-light uk-padding uk-panel');
+    //@todo need to refactor this--too easy to break by changing the template
+    $('.clearBackground').removeClass('uk-background-primary uk-light uk-padding uk-panel');
     toggleNextButton('off');
+    return false;
+}
+
+function setInput(name, value)
+{
+
+    //clear any prior selection backgrounds:
+    clearAllPanelBackgrounds();
+    $('#input-'+name).val(value);
+    $('#modal-'+value).modal('hide');
+    //add background back to new selection:
+    $('#product-panel-'+value).addClass('uk-background-primary uk-light uk-padding uk-panel');
+    toggleNextButton('on');
     return false;
 }
 
