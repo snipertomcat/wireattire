@@ -28,11 +28,17 @@
             @endcomponent
     </div>
     <div id="products-row-main" style="display: none">
+        {{-- @todo fix this ugly ass shit! --}}
         @foreach(array_chunk($products, 3) as $threeProducts)
             <div class="row">
                 @foreach($threeProducts as $product)
                     <a href="" data-toggle="modal" data-target=".product-focus-modal-{{ $product->sku }}">
-                        <div class="col-xs-2 col-lg-4 col-md-3" id="product-panel-{{ $product->sku }}">
+                        {{-- the clearBackground class is there to make it easier to select in javascript
+                             Although it is cross-cutting concerns, it make it much simpler to clear previously
+                             selected products because the id is different and changing any of the col-* will break the
+                             de-select process.
+                        --}}
+                        <div class="col-xs-2 col-lg-4 col-md-3 clearBackground" id="product-panel-{{ $product->sku }}">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <span class="badge pull-right">${{ $product->price }}</span>
@@ -83,16 +89,3 @@
         @endforeach
     </div>
 @endsection
-<script>
-    function setInput(name, value)
-    {
-        $('#input-'+name).val(value);
-        $('#modal-'+value).modal('hide');
-        //clear any prior selection backgrounds:
-        clearAllPanelBackgrounds();
-        //add background back to new selection:
-        $('#product-panel-'+value).addClass('uk-background-primary uk-light uk-padding uk-panel');
-        toggleNextButton('on');
-        return false;
-    }
-</script>

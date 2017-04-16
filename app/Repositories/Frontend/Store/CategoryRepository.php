@@ -9,7 +9,7 @@ namespace App\Repositories\Frontend\Store;
 
 use App\Repositories\BaseRepository;
 
-class ProductRepository extends BaseRepository
+class PackageRepository extends BaseRepository
 {
 
 }

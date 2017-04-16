@@ -11,7 +11,7 @@
                     Step {{ $step }}/5
                 </div>
             </div>
-            <button id="nextButton" class="btn btn-warning pull-left disabled" style="width: 100%;" onclick="$('#item-selection').submit();" disabled>Next</button>
+            <button id="nextButton" class="btn btn-warning pull-left disabled" style="width: 100%;" onclick="$('#proxy-submit-btn').click(); " disabled>Next</button>
         </div>
     </div>
     <div class="col-xs-12 col-md-5 col-lg-6">
@@ -20,7 +20,7 @@
                 <div class="pull-left">
                     Please select your {{ $icon }}
                 </div>
-                <form name="item-selection" id="item-selection" method="post">
+                <form name="item-selection" id="item-selection" method="post" action="#">
                     <select name="size" id="input-size" class="btn btn-primary pull-left" style="margin-top: 30px; margin-left: 30px;">
                         <option value="">Select Size</option>
                         <option value="SM">Small</option>
@@ -33,6 +33,8 @@
                     <input type="hidden" name="category_id" id="input-category-id" value="{{ $category_id }}" />
                     <input type="hidden" name="sku" id="input-sku" />
                     <input type="hidden" name="package_id" id="input-package-id" value="{{ $package_id }}" />
+                    <input type="submit" id="proxy-submit-btn" style="display:none" />
+                    {{ csrf_field() }}
                 </form>
                 {{--</div>--}}
             </div>
