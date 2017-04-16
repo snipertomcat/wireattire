@@ -22,6 +22,9 @@
                 @slot('category_id')
                     {{ $category_id }}
                 @endslot
+                @slot('package_id')
+                    {{ $package_id }}
+                @endslot
             @endcomponent
     </div>
     <div id="products-row-main" style="display: none">
@@ -29,7 +32,7 @@
             <div class="row">
                 @foreach($threeProducts as $product)
                     <a href="" data-toggle="modal" data-target=".product-focus-modal-{{ $product->sku }}">
-                        <div class="col-xs-3 col-lg-3 col-md-3" id="product-panel-{{ $product->sku }}">
+                        <div class="col-xs-2 col-lg-4 col-md-3" id="product-panel-{{ $product->sku }}">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <span class="badge pull-right">${{ $product->price }}</span>

@@ -19,7 +19,8 @@ class EssentialsController extends Controller
 
         $data = [
             'products' => $products->toArray(),
-            'category_id' => 1
+            'category_id' => 1,
+            'package_id' => 1
         ];
 
         return view('frontend.package.essentials.male', $data);
