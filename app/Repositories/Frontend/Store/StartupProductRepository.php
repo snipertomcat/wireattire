@@ -23,10 +23,28 @@ class StartupProductRepository extends BaseRepository
             ->get();
     }
 
+    /**
+     * Retrieve product by sku
+     * @param $sku
+     * @return mixed
+     */
     public function getBySku($sku)
     {
         return DB::table('products_startup')
             ->where('sku', '=', $sku)
+            ->get();
+    }
+
+    /**
+     * Retrieve row at specified field
+     * @param $field
+     * @param $value
+     * @return mixed
+     */
+    public function getByField($field, $value)
+    {
+        return DB::table('products_startup')
+            ->where($field, '=', $value)
             ->get();
     }
 }

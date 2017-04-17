@@ -7,9 +7,10 @@
 namespace App\Repositories\Frontend\Store;
 
 
+use App\Models\Products\ProductsCategory;
 use App\Repositories\BaseRepository;
 
-class PackageRepository extends BaseRepository
+class CategoryRepository extends BaseRepository
 {
-
+    const MODEL = ProductsCategory::class;
 }
