@@ -2,11 +2,14 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class BaseRepository.
  */
 class BaseRepository
 {
+
     /**
      * @return mixed
      */

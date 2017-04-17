@@ -7,7 +7,7 @@ use Database\DisableForeignKeys;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class HistoryTypeTableSeeder.
+ * Class SubscriptionTypeTableSeeder.
  */
 class SubscriptionTypeTableSeeder extends Seeder
 {
