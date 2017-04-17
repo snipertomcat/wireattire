@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Session;
 /**
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
@@ -14,6 +14,9 @@ Route::get('wired',  'FrontendController@wired')->name('wired');
  */
 Route::group(['namespace' => 'Package', 'as' => 'package.'], function () {
 
+    if (!Session::isStarted()) {
+        Session::start();
+    }
     /**
      * Essentials package
      */

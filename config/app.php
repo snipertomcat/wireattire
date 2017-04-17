@@ -201,6 +201,11 @@ return [
         App\Providers\MacroServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Additonal Service Providers
+         */
+        App\Providers\ResolverProvider::class,
+        App\Providers\StoreProvider::class,
     ],
 
     /*
@@ -260,6 +265,12 @@ return [
         'Gravatar'    => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Html'        => Collective\Html\HtmlFacade::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
+
+        /*
+         * Additional aliases
+         */
+        'ModelResolver' => App\Store\ModelResolver::class,
+        'Cart'          => App\Store\Cart::class,
 
     ],
 

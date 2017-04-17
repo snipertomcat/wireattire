@@ -4,14 +4,15 @@
  * Date: 4/16/2017
  */
 
-namespace App\Store\Traits;
+namespace App\Store;
 
+use App\Models\Store\StartupProduct;
 use App\Repositories\Frontend\Store\PackageRepository;
 use App\Repositories\Frontend\Store\ProductRepository;
 use App\Repositories\Frontend\Store\StartupProductRepository;
 use App\Repositories\Frontend\Store\CategoryRepository;
 
-trait ModelResolver
+class ModelResolver
 {
     protected $packageRepo;
 
@@ -42,13 +43,19 @@ trait ModelResolver
         return $this->productRepo->find($product_id);
     }
 
-    public function resolveStartupProduct($startupProductId)
+    public function resolveStartupProduct($idsOrArray)
     {
-        return $this->startupProductRepo->find($startupProductId);
+        $data = $this->startupProductRepo->getBySku($idsOrArray)->toArray();
+        return StartupProduct::find($data[0]->id);
     }
 
     public function resolveCategory($category_id)
     {
         return $this->categoryRepo->find($category_id);
+    }
+
+    public function resolveSubscription($subscription_id)
+    {
+        //@todo : implement
     }
 }

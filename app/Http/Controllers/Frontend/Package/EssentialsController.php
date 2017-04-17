@@ -9,6 +9,8 @@ use App\Repositories\Frontend\Store\StartupProductRepository;
 use App\Store\Cart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Class EssentialsController.
@@ -61,9 +63,16 @@ class EssentialsController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $cart = new Cart(session_id(), $request->package_id);
+        /** @var Cart $cart */
+        $cart = App::make('Cart');
+        $cart->setSessionId(Session::getId());
 
-        $cart->addProduct($this->startupProducts->getBySku($request->sku));
+        //set attributes from request:
+        $cart->cacheAttributes($request->request);
+
+        $cart->persist();
+
+        return redirect()->route('frontend.package.essentials.male')->withFlashSuccess('Success!');
     }
 
 }

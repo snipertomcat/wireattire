@@ -6,6 +6,7 @@
 
 namespace App\Store\Traits;
 
+use App\Models\Products\ProductsCategory;
 use App\Models\Store\StartupProduct;
 use App\Models\Subscription\Packages;
 use App\Models\Subscription\Subscription;
@@ -38,6 +39,11 @@ trait Redisable
     public function getCart()
     {
         return Redis::lrange('cart:' . $this->sessionId .':products',  0, -1);
+    }
+
+    public function persist()
+    {
+        Redis::save();
     }
 
     public function __destruct()
