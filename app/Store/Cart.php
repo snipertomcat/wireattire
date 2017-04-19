@@ -55,19 +55,30 @@ class Cart
     public function cacheAttributes(ParameterBag $bag)
     {
         //resolve package & inject:
-        $package = $this->modelResolver->resolvePackage($bag->get('package_id'));
-        $this->setPackage($package);
+        $this->setPackage($bag->get('package_id'));
+
+        //check if request has any product selections:
+        if ($bag->has('sku')) {
+            $this->addProduct($bag->get('sku'));
+        }
 
         //add later:
         //$this->setSubscription($this->resolveSubscription($bag->get('subscription_id')));
     }
 
-    public function resolveAndAddProduct(ParameterBag $bag)
+    public function addProduct($sku)
     {
         //resolve product:
-        $product = $this->modelResolver->resolveStartupProduct($bag->get('sku'));
-        $this->addProduct($product);
+        $product = $this->modelResolver->resolveStartupProduct($sku);
+        array_push($this->products, $product);
+        $this->addRedisProduct($product);
     }
 
+    private function setPackage($package_id)
+    {
+       $package = $this->modelResolver->resolvePackage($package_id);
+       $this->package = $package;
+       $this->setRedisPackage($package);
+    }
 
 }
