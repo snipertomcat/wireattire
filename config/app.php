@@ -271,6 +271,7 @@ return [
          */
         'ModelResolver' => App\Store\ModelResolver::class,
         'Cart'          => App\Store\Cart::class,
+        'StoreRequest'  => App\Http\Requests\Frontend\Store\StoreRequest::class,
 
     ],
 

@@ -43,9 +43,10 @@ class ModelResolver
         return $this->productRepo->find($product_id);
     }
 
-    public function resolveStartupProduct($idsOrArray)
+    public function resolveStartupProduct($sku)
     {
-        $data = $this->startupProductRepo->getBySku($idsOrArray)->toArray();
+        $data = $this->startupProductRepo->getBySku($sku)->toArray();
+        //transform $data into an actual StartupProduct object:
         return StartupProduct::find($data[0]->id);
     }
 
