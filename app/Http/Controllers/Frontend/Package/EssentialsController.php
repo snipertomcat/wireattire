@@ -65,14 +65,19 @@ class EssentialsController extends Controller
     {
         /** @var Cart $cart */
         $cart = App::make('Cart');
-        $cart->setSessionId(Session::getId());
+
+        //make sure session is started, grab id:
+        if (!Session::isStarted()) {
+            Session::start();
+        }
+
+        $sessionId = Session::getId();
+        $cart->setSessionId($sessionId);
 
         //set attributes from request:
         $cart->cacheAttributes($request->request);
 
-        $cart->persist();
-
-        return redirect()->route('frontend.package.essentials.male')->withFlashSuccess('Success!');
+        return redirect()->route('frontend.package.essentials.male', ['step' => 2])->withFlashSuccess('Success!');
     }
 
 }
