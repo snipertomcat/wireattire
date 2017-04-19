@@ -10,6 +10,7 @@ use App\Models\Products\ProductsCategory;
 use App\Models\Store\StartupProduct;
 use App\Models\Subscription\Packages;
 use App\Models\Subscription\Subscription;
+use Illuminate\Redis\Connections\PredisConnection;
 use Illuminate\Support\Facades\Redis;
 
 /**
@@ -21,12 +22,12 @@ use Illuminate\Support\Facades\Redis;
  */
 trait Redisable
 {
-    public function addProduct(StartupProduct $product)
+    public function addRedisProduct(StartupProduct $product)
     {
         Redis::rpush('cart:' . $this->sessionId . ':products', $product);
     }
 
-    public function setPackage(Packages $package)
+    public function setRedisPackage(Packages $package)
     {
         Redis::rpush('cart:' . $this->sessionId . ':package', $package);
     }
@@ -46,10 +47,9 @@ trait Redisable
         Redis::save();
     }
 
-    public function __destruct()
+    public function test()
     {
-        Redis::del('cart:' . $this->sessionId . ':products');
-        Redis::del('cart:' . $this->sessionId . ':subscription');
-        Redis::del('cart:' . $this->sessionId . ':package');
+        /** @var PredisConnection $connection */
+        $connection = Redis::connection();
     }
 }
