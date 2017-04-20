@@ -19,27 +19,45 @@ use Illuminate\Support\Facades\Redis;
  *
  * Classes that use this trait have access to the redis layer of application. Use these built-in
  * methods to store & retrieve data in redis.
+ *
+ * redis node: cart/sessionId/products
  */
 trait Redisable
 {
     public function addRedisProduct(StartupProduct $product)
     {
-        Redis::rpush('cart:' . $this->sessionId . ':products', $product);
+        Redis::hmset('cart:' . $this->sessionId . ':products:' . $product->id , $product->getAttributes());
     }
 
     public function setRedisPackage(Packages $package)
     {
-        Redis::rpush('cart:' . $this->sessionId . ':package', $package);
+        Redis::hmset('cart:' . $this->sessionId . ':package', $package->getAttributes());
     }
 
     public function setSubscription(Subscription $subscription)
     {
-        Redis::rpush('cart:' . $this->sessionId . ':subscription', $subscription);
+        Redis::hmset('cart:' . $this->sessionId . ':subscription', $subscription->getAttributes());
     }
 
     public function getCart()
     {
-        return Redis::lrange('cart:' . $this->sessionId .':products',  0, -1);
+        //@todo: implement getCart()
+    }
+
+
+    public function getCartProducts()
+    {
+        return Redis::hmget('cart:' . $this->sessionId .':products');
+    }
+
+    public function getCartPackage()
+    {
+        return Redis::hmget('cart:' . $this->sessionId . ':package');
+    }
+
+    public function getCartSubscription()
+    {
+        return Redis::hmget('cart:' . $this->sessionId . ':subscription');
     }
 
     public function persist()
