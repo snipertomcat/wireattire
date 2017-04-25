@@ -9,8 +9,8 @@
         <title>@yield('title', app_name())</title>
 
         <!-- Meta -->
-        <meta name="description" content="@yield('meta_description', 'Laravel 5 Boilerplate')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+        <meta name="description" content="@yield('meta_description', 'Wire Attire')">
+        <meta name="author" content="@yield('meta_author', 'Jesse Griffin')">
         @yield('meta')
 
         <!-- Styles -->
@@ -33,12 +33,12 @@
             ]); ?>
         </script>
     </head>
-    <body id="app-layout">
+    <body id="app-layout" style="margin-top: 50px;">
         <div id="app">
             @include('includes.partials.logged-in-as')
             @include('frontend.includes.nav')
 
-            <div class="container-fluid">
+            <div class="container">
                 @include('includes.partials.messages')
                 @yield('content')
             </div><!-- container -->

@@ -14,7 +14,7 @@ class StoreProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind('App\Store\Cart', function($app) {
+        $this->app->singleton('App\Store\Cart', function($app) {
             return new Cart($app->make('App\Store\ModelResolver'));
         });
     }

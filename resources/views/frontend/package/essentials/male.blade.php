@@ -11,7 +11,7 @@
                     width: 30%
                 @endslot
                 @slot('step')
-                    2
+                    {{ $step }}
                 @endslot
                 @slot('icon')
                     <img src="<?php echo asset("storage/icon-underwear.png")?>" height="100px" width="100px" style="margin-left:5px;"/>
