@@ -5,13 +5,15 @@ namespace App\Http\Controllers\Frontend\Package;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Store\StoreRequest;
 use App\Models\Store\StartupProduct;
+use App\Models\Subscription\Subscription;
 use App\Repositories\Frontend\Store\StartupProductRepository;
 use App\Store\Cart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+use Illuminate\Support\Facades\DB;
 /**
  * Class EssentialsController.
  */
@@ -22,9 +24,14 @@ class EssentialsController extends Controller
     /** @var StartupProductRepository $startupProducts */
     protected $startupProducts;
 
+    protected $steps;
+
     public function __construct(StartupProductRepository $startupProducts)
     {
         $this->startupProducts = $startupProducts;
+        $this->steps = DB::table('subscription_packages')->where('name', '=', 'Essentials')
+                                                         ->where('type_id', '=', 1)
+                                                         ->get()->all()[0]->steps;
     }
 
     /**
@@ -32,13 +39,28 @@ class EssentialsController extends Controller
      */
     public function male()
     {
-        $products = $this->startupProducts->getActiveByCategory(1);
-        $data = [
-            'products' => $products->toArray(),
-            'category_id' => 1,
-            'package_id' => 1
-        ];
+        if (Session::has('step')) {
+            $step = Session::get('step');
+            $category_id = $step;
+            $step++;
+            Session::put('step', $step);
+        } else {
+            $category_id  = 1;
+            $step = 1;
+            Session::put('step', $step);
+        }
 
+        if ($step < $this->steps) {
+            $products = $this->startupProducts->getActiveByCategory($category_id);
+            $data = [
+                'products' => $products->toArray(),
+                'category_id' => $category_id,
+                'package_id' => 1,
+                'step' => $step
+            ];
+        } else {
+            return redirect('subscription/select');
+        }
         return view('frontend.package.essentials.male', $data);
     }
 
@@ -72,12 +94,21 @@ class EssentialsController extends Controller
         }
 
         $sessionId = Session::getId();
-        $cart->setSessionId($sessionId);
+        if (!$cart->hasSessionId()) {
+            $cart->setSessionId($sessionId);
+        }
 
         //set attributes from request:
         $cart->cacheAttributes($request->request);
 
-        return redirect()->route('frontend.package.essentials.male', ['step' => 2])->withFlashSuccess('Success!');
+        //Session::put('cart'.$sessionId, $cart);
+        if (Session::has('step')) {
+            $step = Session::get('step');
+        }
+        Session::put('step', $step);
+        Session::save();
+
+        return redirect()->route('frontend.package.essentials.male', ['step' => $step])->withFlashSuccess('Success!');
     }
 
 }

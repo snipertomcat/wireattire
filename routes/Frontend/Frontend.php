@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 /**
  * Frontend Controllers
  * All route names are prefixed with 'frontend.'.
@@ -12,7 +13,7 @@ Route::get('wired',  'FrontendController@wired')->name('wired');
  * These routes don't require user to be logged in.
  * All these are prefixed with 'package.'
  */
-Route::group(['namespace' => 'Package', 'as' => 'package.'], function () {
+Route::group(['namespace' => 'Package', 'as' => 'package.', 'prefix' => 'package'], function () {
 
     if (!Session::isStarted()) {
         Session::start();
@@ -38,9 +39,20 @@ Route::group(['namespace' => 'Package', 'as' => 'package.'], function () {
     //Kids:
     Route::get('essentials-plus/kids', 'EssentialsPlusController@kids')->name('essentials-plus.kids');
 
-
 });
 
+Route::group(['namespace' => 'Subscription', 'as' => 'subscription.', 'prefix' => 'subscription'], function () {
+
+    Route::get('select', 'SubscriptionController@select')->name('subscription.select');
+    //Route::post('select', 'SubscriptionController@store')->name('subscription.store');
+
+    //Route::get('verify', 'SubscriptionController@verify')->name('subscription.verification');
+
+    Route::get('/', 'SubscriptionController@index')->name('subscription.index');
+
+    Route::get('/showAllProducts', 'SubscriptionController@showAllProducts')->name('subscription.showAllproducts');
+
+});
 /*
  * These frontend controllers require the user to be logged in
  * All route names are prefixed with 'frontend.'

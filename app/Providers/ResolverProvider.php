@@ -26,7 +26,7 @@ class ResolverProvider extends ServiceProvider
                          );
 
 
-        $this->app->bind('App\Store\ModelResolver', function($app) use ($modelResolver) {
+        $this->app->singleton('App\Store\ModelResolver', function($app) use ($modelResolver) {
             return $modelResolver;
         });
     }

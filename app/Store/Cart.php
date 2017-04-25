@@ -39,6 +39,8 @@ class Cart
      */
     protected $modelResolver;
 
+    protected $step = 0;
+
     /**
      * Cart constructor.
      */
@@ -52,15 +54,29 @@ class Cart
         $this->sessionId = $sessionId;
     }
 
+    public function hasSessionId()
+    {
+        return (isset($this->sessionId) && $this->sessionId !== null) ? true : false;
+    }
+
     public function cacheAttributes(ParameterBag $bag)
     {
-        //resolve package & inject:
-        $this->setPackage($bag->get('package_id'));
+        if (!isset($this->package)) {
+            //resolve package & inject:
+            $this->setPackage($bag->get('package_id'));
+        }
+
+        if ($this->step == 0) {
+            //clear products first
+            $this->clearCart();
+        }
 
         //check if request has any product selections:
         if ($bag->has('sku')) {
             $this->addProduct($bag->get('sku'));
         }
+
+        $this->step = $bag->get('step');
 
         //add later:
         //$this->setSubscription($this->resolveSubscription($bag->get('subscription_id')));

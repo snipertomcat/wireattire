@@ -60,6 +60,11 @@ trait Redisable
         return Redis::hmget('cart:' . $this->sessionId . ':subscription');
     }
 
+    public function clearCart()
+    {
+        Redis::hdel('cart:' . $this->sessionId, 'products');
+    }
+
     public function persist()
     {
         Redis::save();
