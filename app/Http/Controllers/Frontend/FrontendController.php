@@ -42,7 +42,19 @@ class FrontendController extends Controller
      */
     public function wired()
     {
-        return view('frontend.wired');
+        $directory = public_path().'/storage/thumbnails';
+        $filenames = [];
+        $iterator = new \DirectoryIterator($directory);
+        foreach ($iterator as $fileinfo) {
+            if ($fileinfo->isFile() && !($fileinfo->isDot())) {
+                if (in_array(strtolower($fileinfo->getExtension()), ['png', 'jpg', 'jpeg', 'tiff', 'gif', 'bmp'])) {
+                    $filenames[] = $fileinfo->getFilename();
+                }
+            }
+        }
+        return view('frontend.wired', [
+            'filenames' => $filenames
+        ]);
     }
 
 }

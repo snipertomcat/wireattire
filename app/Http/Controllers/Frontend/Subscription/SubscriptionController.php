@@ -30,13 +30,15 @@ class SubscriptionController extends Controller
         $iterator = new \DirectoryIterator($directory);
         foreach ($iterator as $fileinfo) {
             if ($fileinfo->isFile() && !($fileinfo->isDot())) {
-                $filenames[$fileinfo->getMTime()] = $fileinfo->getFilename();
+                if (in_array(strtolower($fileinfo->getExtension()), ['png', 'jpg', 'jpeg', 'tiff', 'gif', 'bmp'])) {
+                    $filenames[$fileinfo->getMTime()] = $fileinfo->getFilename();
+                }
             }
         }
 
         return view('frontend.subscription.showAllProducts', [
             'thumbs' => array_values($filenames),
-            'step' => 3,
+            'step' => 1,
             'category_id' => 4,
             'package_id' => 10
         ]);

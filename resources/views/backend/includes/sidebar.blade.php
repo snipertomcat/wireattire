@@ -91,6 +91,18 @@
                     </li>
                 </ul>
             </li>
+
+            @role('Administrator')
+                <li class="header">Tools</li>
+
+                    <li class="{{ active_class(Active::checkUriPattern('admin/scraper')) }}">
+                    <a href="{{ route('admin.scraper.index') }}">
+                        <i class="fa fa-wrench fa-lg"></i>
+                        <span>Web Scrapers</span>
+                    </a>
+                </li>
+            @endauth
+
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

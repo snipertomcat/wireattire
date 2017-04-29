@@ -112,7 +112,7 @@ class SetupAccessTables extends Migration
         });
 
         Schema::table(config('access.permissions_table'), function (Blueprint $table) {
-            $table->dropUnique(config('access.permissions_table').'_name_unique');
+            $table->dropUnique(config(' access.permissions_table').'_name_unique');
         });
 
         Schema::table(config('access.permission_role_table'), function (Blueprint $table) {

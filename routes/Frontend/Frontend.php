@@ -43,14 +43,14 @@ Route::group(['namespace' => 'Package', 'as' => 'package.', 'prefix' => 'package
 
 Route::group(['namespace' => 'Subscription', 'as' => 'subscription.', 'prefix' => 'subscription'], function () {
 
-    Route::get('select', 'SubscriptionController@select')->name('subscription.select');
+    Route::get('select', 'SubscriptionController@select')->name('select');
     //Route::post('select', 'SubscriptionController@store')->name('subscription.store');
 
     //Route::get('verify', 'SubscriptionController@verify')->name('subscription.verification');
 
-    Route::get('/', 'SubscriptionController@index')->name('subscription.index');
+    Route::get('/', 'SubscriptionController@index')->name('index');
 
-    Route::get('/showAllProducts', 'SubscriptionController@showAllProducts')->name('subscription.showAllproducts');
+    Route::get('/showAllProducts', 'SubscriptionController@showAllProducts')->name('showAllproducts');
 
 });
 /*
