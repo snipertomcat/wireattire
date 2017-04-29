@@ -33,7 +33,7 @@
             ]); ?>
         </script>
     </head>
-    <body id="app-layout" style="margin-top: 50px;">
+    <body id="app-layout" style="margin-top:50px;">
         <div id="app">
             @include('includes.partials.logged-in-as')
             @include('frontend.includes.nav')
