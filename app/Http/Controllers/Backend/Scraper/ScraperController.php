@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Scraper;
 
 use App\Models\Scraper\Scraper;
+use App\Models\Store\ModalystProduct;
+use App\Scrapers\DefaultScraper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\DomCrawler\Crawler;
@@ -17,21 +19,26 @@ class ScraperController extends Controller
 
     public function show(Goutte $client)
     {
+        $scraper = new DefaultScraper($client);
+        $scraper->setFollowRedirects(true);
 
-        $crawler = $client->request('GET', 'https://modalyst.co/explore/?menu=apparel.denim#sortby=most_views');
+        $scraper->setLoginForm('https://modalyst.co/login', '//*[@id="login-form"]/div/button');
+        $scraper->authorize('email', 'hemham914@gmail.com', 'password', 'yeahyeah');
+        $scraper->connect('https://modalyst.co/explore/?menu=apparel.denim#sortby=most_views');
 
-        $crawler->filter('.item_displa y')->each(function(Crawler $node) {
-            $product['image'] = $node->filter('img')->image();
+        $callable = function(Crawler $node) {
+            $product['image'] = $node->filter('img')->image()->getUri();
             $overview = $node->filter('.item_overview');
             $product['title'] = $overview->filter('h1')->text();
             $product['title_short'] = $overview->filter('h2')->text();
             $product['price'] = trim($overview->filter('.price')->text());
             $product['commission'] = $overview->filter('.commission')->text();
+            $modalystProduct = ModalystProduct::query()->create($product);
+            $modalystProduct->save();
+        };
 
-            dd($product);
-        });
 
-        $images = $crawler->filter('img')->images();
+        $images = $scraper->filter('.item_display', $callable)->images();
 
         dd($images);
         $nodes = [];

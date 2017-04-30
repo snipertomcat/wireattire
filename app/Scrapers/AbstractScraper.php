@@ -8,6 +8,7 @@ namespace App\Scrapers;
 
 
 use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
 
 abstract class AbstractScraper implements ScraperContract
 {
@@ -40,10 +41,12 @@ abstract class AbstractScraper implements ScraperContract
         $form[$passField] = $pass;
         $crawler = $client->submit($form);
 
-        $client->setAuth('hemham914@gmail.com', 'yeahyeah');
+        $client->setAuth($user, $pass);
 
         $this->crawler = $crawler;
         $this->client = $client;
+
+        return $this;
     }
 
     public function setLoginForm($url, $xpath)
@@ -55,22 +58,23 @@ abstract class AbstractScraper implements ScraperContract
 
     /**
      * Calls $this->crawler->filter($selector) and passes that into an each() loop with the
-     * passed in callable. The callable's signature (which is most likely a closure) should be:
-     *
-     * $func = return function(Crawler $node) { /** do stuff *\/ };
-     * $scraper->filter('somecrazy\pa/th', $func)
+     * code passed in $codeBlock.
      *
      * @param $selector
-     * @param $callable
+     * @param $codeBlock
      */
-    public function filter($selector, $callable)
+    public function filter($selector, $codeBlock)
     {
-        $this->crawler->filter($selector, )
+        return $this->crawler->filter($selector)->each(function(Crawler $node) use ($codeBlock) {
+            return call_user_func($codeBlock, $node);
+        });
     }
 
     public function connect($url)
     {
         $this->crawler = $this->client->request('GET', $url);
+
+        return $this;
     }
 
 
@@ -90,5 +94,21 @@ abstract class AbstractScraper implements ScraperContract
         }
 
         return $cookies;
+    }
+
+    public function get($varname)
+    {
+        if (isset($this->$varname)) {
+            return $this->$varname;
+        }
+        return false;
+    }
+
+    public function set($varname, $value)
+    {
+        if (isset($this->$varname)) {
+            $this->$varname = $value;
+        }
+        return $this;
     }
 }

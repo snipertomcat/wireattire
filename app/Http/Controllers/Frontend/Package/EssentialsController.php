@@ -39,6 +39,7 @@ class EssentialsController extends Controller
      */
     public function male()
     {
+        //@todo refactor the step component - clock/tick
         if (Session::has('step')) {
             $step = Session::get('step');
             $category_id = $step;
