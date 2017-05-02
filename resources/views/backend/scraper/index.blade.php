@@ -18,7 +18,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">Web Scrapers</h3>
             <div class="box-tools pull-right">
-                @include('backend.access.includes.partials.user-header-buttons')
+                @include('backend.includes.partials.scraper-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
@@ -30,10 +30,15 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Site</th>
-                        <th>Records</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
+                    @foreach ($scrapers as $scraper)
+                        <tr>
+                            <td>{{ $scraper->id }}</td>
+                            <td>{{ $scraper->name }}</td>
+                            <td>{{ $scraper->slug }}</td>
+                        </tr>
+                    @endforeach
                 </table>
             </div><!--table-responsive-->
         </div><!-- /.box-body -->

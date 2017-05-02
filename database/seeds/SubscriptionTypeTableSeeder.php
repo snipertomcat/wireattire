@@ -41,7 +41,13 @@ class SubscriptionTypeTableSeeder extends Seeder
                 'name'      => 'Kids',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
-            ]
+            ],
+            [
+                'id'        => 10,
+                'name'      => 'Misc',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
 
         DB::table('subscription_types')->insert($types);

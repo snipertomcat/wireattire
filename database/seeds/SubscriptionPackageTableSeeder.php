@@ -105,6 +105,13 @@ class SubscriptionPackageTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'id'        => 99,
+                'name'      => 'Open Selection',
+                'type_id'   => 10,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ];
 
         DB::table('subscription_packages')->insert($subscription_packages);
