@@ -12,55 +12,24 @@ use Goutte\Client as Goutte;
 
 class ScraperController extends Controller
 {
-    public function index()
+    protected $scraper;
+
+    public function __construct(DefaultScraper $scraper)
     {
-        return view('backend.scraper.index');
+        $this->scraper = $scraper;
     }
 
-    public function show(Goutte $client)
+    public function index()
     {
-        $scraper = new DefaultScraper($client);
-        $scraper->setFollowRedirects(true);
+        $scrapers = Scraper::all();
+        return view('backend.scraper.index', ['scrapers' => $scrapers]);
+    }
 
-        $scraper->setLoginForm('https://modalyst.co/login', '//*[@id="login-form"]/div/button');
-        $scraper->authorize('email', 'hemham914@gmail.com', 'password', 'yeahyeah');
-        $scraper->connect('https://modalyst.co/explore/?menu=apparel.denim#sortby=most_views');
+    public function show()
+    {
+        $results = $this->scraper->run();
 
-        $callable = function(Crawler $node) {
-            $product['image'] = $node->filter('img')->image()->getUri();
-            $overview = $node->filter('.item_overview');
-            $product['title'] = $overview->filter('h1')->text();
-            $product['title_short'] = $overview->filter('h2')->text();
-            $product['price'] = trim($overview->filter('.price')->text());
-            $product['commission'] = $overview->filter('.commission')->text();
-            $modalystProduct = ModalystProduct::query()->create($product);
-            $modalystProduct->save();
-        };
-
-
-        $images = $scraper->filter('.item_display', $callable)->images();
-
-        dd($images);
-        $nodes = [];
-        foreach ($images as $image)
-        {
-            $nodes = $image->getNode();
-        }
-
-        foreach ($nodes as $node)
-        {
-
-        }
-
-       /* $crawler->filter('.item_display')->each(function($node) {
-            //$node = $node->filter('img')->each(function($node) {
-                print_r($node->images());
-            //});
-        });*/
-//        echo count($data);
-//        echo "<pre>";print_r($data);
-        //dd($crawler);
-        //return view('backend.scraper.show');
+        return view('backend.scraper.show', ['data' => $results]);
     }
 
     public function edit()

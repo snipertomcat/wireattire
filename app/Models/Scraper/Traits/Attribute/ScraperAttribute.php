@@ -91,7 +91,7 @@ trait ScraperAttribute
      */
     public function getShowButtonAttribute()
     {
-        return '<a href="'.route('admin.scraper.show', $this).'" class="btn btn-xs btn-info"><i class="fa fa-search" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.view').'"></i></a> ';
+        return '<a href="'.route('admin.scraper.show', $this).'" class="btn btn-xs btn-info"><i class="fa fa-search" data-toggle="tooltip" data-placement="top" title="Show"></i></a> ';
     }
 
     /**
@@ -99,7 +99,7 @@ trait ScraperAttribute
      */
     public function getEditButtonAttribute()
     {
-        return '<a href="'.route('admin.scraper.edit', $this).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.edit').'"></i></a> ';
+        return '<a href="'.route('admin.scraper.edit', $this).'" class="btn btn-xs btn-primary"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Edit"></i></a> ';
     }
 
     /**
@@ -113,14 +113,14 @@ trait ScraperAttribute
                     return '<a href="'.route('admin.scraper.mark', [
                         $this,
                         1,
-                    ]).'" class="btn btn-xs btn-success"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.backend.access.scrapers.activate').'"></i></a> ';
+                    ]).'" class="btn btn-xs btn-success"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="Activate"></i></a> ';
                 // No break
 
                 case 1:
                     return '<a href="'.route('admin.scraper.mark', [
                         $this,
                         0,
-                    ]).'" class="btn btn-xs btn-warning"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.backend.access.scrapers.deactivate').'"></i></a> ';
+                    ]).'" class="btn btn-xs btn-warning"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="Deactivate"></i></a> ';
                 // No break
 
                 default:
@@ -152,9 +152,9 @@ trait ScraperAttribute
         if ($this->id != access()->id()) {
             return '<a href="'.route('admin.scraper.destroy', $this).'"
                  data-method="delete"
-                 data-trans-button-cancel="'.trans('buttons.general.cancel').'"
-                 data-trans-button-confirm="'.trans('buttons.general.crud.delete').'"
-                 data-trans-title="'.trans('strings.backend.general.are_you_sure').'"
+                 data-trans-button-cancel="Cancel"
+                 data-trans-button-confirm="Delete"
+                 data-trans-title="Are you sure?"
                  class="btn btn-xs btn-danger"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="'.trans('buttons.general.crud.delete').'"></i></a> ';
         }
 
