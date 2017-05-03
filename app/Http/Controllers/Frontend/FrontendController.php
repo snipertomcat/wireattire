@@ -16,16 +16,19 @@ class FrontendController extends Controller
      */
     public function index()
     {
-        Session::regenerate();
-        //clear cart
-        if (Session::has('cart'.Session::getId())) {
-            Session::remove('cart'.Session::getId());
+        if (redis()->isConnected()) {
+            //clear cart
+            app()->make('App\Store\Cart')->clearCart();
         }
+        if (session()->has('cart'.session()->getId())) {
+            session()->remove('cart'.session()->getId());
+        }
+        session()->regenerate();
         //set step to 1:
-        Session::put('step', 1);
+        session()->put('step', 1);
         //clear success message
-        Session::remove('flash_success');
-        app()->make('App\Store\Cart')->clearCart();
+        session()->remove('flash_success');
+
         return view('frontend.index');
     }
 

@@ -110,3 +110,11 @@ if (!function_exists('limitCharacters')) {
         return \Illuminate\Support\Str::limit($content, $characters);
     }
 }
+
+if (!function_exists('redis')) {
+
+    function redis()
+    {
+        return app()->make('redis')->connection()->client();
+    }
+}

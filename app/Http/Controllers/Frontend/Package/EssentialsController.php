@@ -99,8 +99,10 @@ class EssentialsController extends Controller
             $cart->setSessionId($sessionId);
         }
 
-        //set attributes from request:
-        $cart->cacheAttributes($request->request);
+        if (redis()->isConnected()) {
+            //set attributes from request:
+            $cart->cacheAttributes($request->request);
+        }
 
         //Session::put('cart'.$sessionId, $cart);
         if (Session::has('step')) {

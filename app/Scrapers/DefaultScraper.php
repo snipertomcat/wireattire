@@ -26,16 +26,13 @@ class DefaultScraper extends AbstractScraper
         $this->connect('https://modalyst.co/explore/?menu=apparel.denim#sortby=most_views');
 
         $callable = function(Crawler $node) {
-            $image = $node->filter('img')->image()->getUri();
-            $product['image'] = mysql_real_escape_string($image);
-            dd($product);
+            $product['image'] = $node->filter('img')->image()->getUri();
             $overview = $node->filter('.item_overview');
             $product['title'] = $overview->filter('h1')->text();
             $product['title_short'] = $overview->filter('h2')->text();
             $product['price'] = trim($overview->filter('.price')->text());
             $product['commission'] = $overview->filter('.commission')->text();
-            $modalystProduct = ModalystProduct::firstOrCreate(['image'=>$product['image'], $product]);
-            return '<pre>' . print_r($modalystProduct) . '</pre>';
+            $modalystProduct = ModalystProduct::firstOrCreate(['title'=>$product['title']], $product);
         };
 
         return $this->filter('.item_display', $callable);
