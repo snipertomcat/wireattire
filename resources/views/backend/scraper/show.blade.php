@@ -15,7 +15,7 @@
             <h3 class="box-title">View Scrapers</h3>
 
             <div class="box-tools pull-right">
-                @include('backend.scraper.includes.partials.user-header-buttons')
+                @include('backend.includes.partials.scraper-header-buttons')
             </div><!--box-tools pull-right-->
         </div><!-- /.box-header -->
 
@@ -33,9 +33,8 @@
                 <div class="tab-content">
 
                     <div role="tabpanel" class="tab-pane mt-30 active" id="overview">
-                        @include('backend.scraper.show.tabs.overview')
+                        @include('backend.scraper.tabs.overview', ['user'=>auth()->user()])
                     </div><!--tab overview profile-->
-
                 </div><!--tab content-->
 
             </div><!--tab panel-->
