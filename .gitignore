@@ -6,7 +6,6 @@
 /storage/*.key
 /storage/old
 /vendor
-.idea
 Homestead.json
 Homestead.yaml
 .env
@@ -22,3 +21,4 @@ error.log
 Todo.rtf
 .vagrant
 /.idea
+npm-debug.log
